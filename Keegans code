@@ -1,0 +1,65 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace RandomWalk
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int totalSteps = 0; //How many steps we want them to make
+            int stepsTaken = 0; //How many they have already made
+            int xPos = 0; //X position
+            int yPos = 0; // Y position
+            int i = 0; //i for the "for" loop
+            float sumX = 0; // float because we might need some decimals!
+            float sumY = 0; //same!
+            Boolean notDone = true;
+
+            
+            Console.WriteLine("Please give a number of steps to take.");
+            int userInput = Console.ReadLine(); //Create a user input int that will get user input...
+            Random rand = new Random(); //Random generator
+            rand.Next(1,userInput);
+            totalSteps = userInput;
+
+            while (notDone)
+            {
+                xPos = 0;
+                yPos = 0;
+                for (stepsTaken = 0; stepsTaken <= totalSteps; stepsTaken++)
+                {
+
+                    int step = rand.Next(100);//generate the numbers 0 to 99
+                    switch (step % 4)
+                    {
+                        case 0:
+                            xPos++;
+                            break;
+                        case 1:
+                            xPos--;
+                            break;
+                        case 2:
+                            yPos++;
+                            break;
+                        case 3:
+                            yPos--;
+                            break;
+                    }
+                    i++;//add one for loop
+                    
+                    if (i == 100) //when I reachs 100 set notDone to false. IE. DONE
+                        notDone = false;
+                    sumX += xPos;
+                    sumY += yPos;
+                }
+            }
+            sumX /= 100; // take avg of sum x
+            sumY /= 100;
+            Console.WriteLine("Yo, this is the avg of where I stopped. ({0} {1})", sumX, sumY);
+            Console.ReadKey();0
+        }
+    }
+}
